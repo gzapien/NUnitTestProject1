@@ -8,7 +8,7 @@ namespace NUnitTestProject
     class NUnit_Demo_1
     {
         Browser_ops brow = new Browser_ops();
-        String test_url = "https://www.amazon.com/";
+        String test_url = "https://staging-www.axosinvest.com/dashboard/login";
         IWebDriver driver;
 
         [SetUp]
@@ -23,45 +23,23 @@ namespace NUnitTestProject
             brow.Goto(test_url);
             driver = brow.getDriver;
 
-            IWebElement element = driver.FindElement(Locators.SearchBox);
-            element.SendKeys("Samsung Galaxy S9");
-            element.Submit();
-            System.Threading.Thread.Sleep(4000);
+            driver.FindElement(Locators.UserName, 15);
+            driver.FindElement(Locators.UserName).SendKeys("staging+1100");
+            driver.FindElement(Locators.Password).SendKeys("Password1!");
+            driver.FindElement(Locators.LoginBtn).Click();
 
-            //Price
-            element = driver.FindElement(Locators.Fprice);
-            string Price = element.Text;
-            //Fraction
-            element = driver.FindElement(Locators.Ffraction);
-            string Fraction = element.Text;
-            string Total = "$" + Price + "." + Fraction;
-            driver.FindElement(Locators.Fprice).Click();
-            element = driver.FindElement(Locators.Oprice);
-            string Oprice = element.Text;
-            Assert.AreEqual(Oprice, Total);
-            Console.WriteLine("Los Precios coinciden");
+            var Security = driver.IsElementPresent(Locators.SecurityCodeTxt);
+            if (Security)
+            {
+                driver.FindElement(Locators.Num1).SendKeys("1");
+                driver.FindElement(Locators.Num2).SendKeys("2");
+                driver.FindElement(Locators.Num3).SendKeys("3");
+                driver.FindElement(Locators.Num4).SendKeys("4");
+                driver.FindElement(Locators.Num5).SendKeys("5");
+                driver.FindElement(Locators.Num6).SendKeys("6");
+            }
 
-
-            driver.FindElement(Locators.AddToCart).Click();
-            System.Threading.Thread.Sleep(4000);
-            driver.FindElement(Locators.MainLogo).Click();
-            System.Threading.Thread.Sleep(4000);
-            driver.FindElement(Locators.YourAmazonBtn).Click();
-            System.Threading.Thread.Sleep(4000);
-            driver.FindElement(Locators.CreatAcctBtn).Click();
-            System.Threading.Thread.Sleep(4000);
-            
-            element = driver.FindElement(Locators.Mail);
-            element.SendKeys("Samsung Galaxy S9");
-            element = driver.FindElement(Locators.Name);
-            element.SendKeys("Samsung Galaxy S9");
-            element = driver.FindElement(Locators.Pass);
-            element.SendKeys("Samsung Galaxy S9");
-            element = driver.FindElement(Locators.Rpass);
-            element.SendKeys("Samsung Galaxy S9");
-            element = driver.FindElement(Locators.CreatAcctLbl);
-            string Label = element.Text;
-            Assert.AreEqual("Create account", Label);
+            driver.FindElement(Locators.AxosLogo, 15);
         }
         
         [TearDown]
