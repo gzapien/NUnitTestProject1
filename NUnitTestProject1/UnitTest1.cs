@@ -37,6 +37,7 @@ namespace NUnitTestProject
                 driver.FindElement(Locators.Num4).SendKeys("4");
                 driver.FindElement(Locators.Num5).SendKeys("5");
                 driver.FindElement(Locators.Num6).SendKeys("6");
+                driver.FindElement(Locators.ConfirmBtn).Click();
             }
 
             driver.FindElement(Locators.AxosLogo, 15);
