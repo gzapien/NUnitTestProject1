@@ -11,7 +11,7 @@ namespace NUnitTestProject
         {
             webDriver = new ChromeDriver();
             webDriver.Manage().Window.Maximize();
-            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
         }
         public string Title
         {
